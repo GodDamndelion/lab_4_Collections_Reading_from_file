@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Main
 {
@@ -30,7 +29,8 @@ public class Main
         File file = new File("foreign_names.csv");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file)))
         {
-            String line = bufferedReader.readLine();
+            bufferedReader.readLine();
+            String line;
             while ((line = bufferedReader.readLine()) != null)
             {
                 int index = 0, pID = 0, elementType = 0, length = line.length();
@@ -119,6 +119,7 @@ final class Person
  */
 final class Department
 {
+    public static int nextID = 1;
     private final int ID;
     private final String Name;
 
@@ -129,8 +130,8 @@ final class Department
     Department(String Name)
     {
         this.Name = Name;
-        Random random = new Random();
-        ID = random.nextInt(1000000);
+        ID = nextID;
+        nextID += 1;
     }
 
     /**
