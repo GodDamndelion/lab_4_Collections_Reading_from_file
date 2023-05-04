@@ -1,10 +1,12 @@
-package org.example;
+package lab4;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main
 {
@@ -120,6 +122,7 @@ final class Person
 final class Department
 {
     public static int nextID = 1;
+    static private final Map<String, Integer> departments = new HashMap<>();
     private final int ID;
     private final String Name;
 
@@ -130,8 +133,12 @@ final class Department
     Department(String Name)
     {
         this.Name = Name;
-        ID = nextID;
-        nextID += 1;
+        if (departments.get(Name) == null)
+        {
+            departments.put(Name, nextID);
+            nextID += 1;
+        }
+        ID = departments.get(Name);
     }
 
     /**
